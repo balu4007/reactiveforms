@@ -1,0 +1,18 @@
+<label>
+  name:
+  <input type="text" [formControl]='name'>
+</label>
+<p>value: {{name.value}}</p>
+<br>
+
+<p><button (click)='onUpdate()'>Update Name</button></p>
+
+<p>
+  <button (click)='onEmit()'>Emit value</button>
+  <button (click)='onSubscribe()'>{{!isSubscribed?'Subscribe':'UnSubscribe'}}</button>
+  <button (click)='emitedList=[]'>clear</button>
+</p>
+
+<ul>
+  <li *ngFor="let item of emitedList">{{item}}</li>
+</ul>

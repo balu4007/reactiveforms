@@ -1,0 +1,60 @@
+<form [formGroup]='profileForm' (ngSubmit)='onSubmit()'>
+  <div class="form-group">
+    <label>First Name:</label>
+    <input [ngClass]="{'is-invalid': errorMessage}" class="form-control" type="text" formControlName='firstName'>
+    <div>
+      <span *ngIf='errorMessage'>
+        <span>{{errorMessage}}</span>
+      </span>
+    </div>
+
+    <div formArrayName='address'>
+      <div class="form-group" *ngFor='let addres of address.controls;let i=index' [formGroupName]='i'>
+
+        <h3>Address</h3>
+        <label for="street">Street:</label>
+        <input id="street" class="form-control" type="text" formControlName="street">
+
+
+        <label>City:</label>
+        <input class="form-control" type="text" formControlName="city">
+
+
+        <label>State:</label>
+        <input class="form-control" type="text" formControlName="state">
+
+
+        <label>Zip Code:</label>
+        <input class="form-control" type="text" formControlName="zip">
+
+      </div>
+      <p><button class="btn btn-default" (click)='addAdderss()' [disabled]='!address.valid'>Add address</button></p>
+    </div>
+
+    <div formArrayName="aliases">
+
+      <h3>Aliases:</h3>
+      <div class="form-group" *ngFor='let alias of aliases.controls; let i=index'>
+        <input class="form-control" type="text" [formControlName]="i">
+      </div>
+
+      <p><button [disabled]='!aliases.valid' (click)='addAliases()'>Add+</button></p>
+
+    </div>
+    <div cla>
+      <button type="submit">Submit</button>
+      <button (click)=updateProfile()>Update Profile</button>
+    </div>
+  </div>
+
+</form>
+
+<p>
+  Form details: {{profileForm.value | json}}
+</p>
+<p>
+  Form Touched: {{profileForm.touched}}
+</p>
+<p>
+  form status: {{profileForm.valid}}
+</p>
